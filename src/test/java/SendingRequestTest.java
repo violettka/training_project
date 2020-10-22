@@ -2,7 +2,9 @@ import documents.*;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -12,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import request.SubmitPage6;
-import school.request.*;
+import school.*;
 import utils.*;
 import utils.enums.TestingType;
 import values.ChildTestInformationStep1Values;
@@ -27,29 +29,29 @@ public class SendingRequestTest {
     private WebDriverWait wait;
     private AllStepsTest allStepsTest;
     private SubmitPage6 submitPage6;
-    private RequestsPage requestsPage;
-    private TestingPage testingPage;
-    private ContractsPage contractsPage;
-    private StudentsPage studentsPage;
-    private InvoicesPage invoicesPage;
-    private JsonReader jsonReader;
+    private school.RequestsPage requestsPage;
+    private school.TestingPage testingPage;
+    private school.ContractsPage contractsPage;
+    private school.StudentsPage studentsPage;
+    private school.InvoicesPage invoicesPage;
+    private utils.JsonReader jsonReader;
 
     public SendingRequestTest() throws URISyntaxException { }
 
     @Before
     public void setUp() throws InterruptedException, URISyntaxException {
-        driver = SeleniumUtils.getDriver();
-        wait = SeleniumUtils.getDriverWait();
-        SeleniumUtils.initializeAndAuthorize(driver);
+        driver = utils.SeleniumUtils.getDriver();
+        wait = utils.SeleniumUtils.getDriverWait();
+        utils.SeleniumUtils.initializeAndAuthorize(driver);
         allStepsTest = new AllStepsTest();
         allStepsTest.initFromOtherTestClass(driver);
         submitPage6 = PageFactory.initElements(driver, SubmitPage6.class);
-        requestsPage = PageFactory.initElements(driver, RequestsPage.class);
+        requestsPage = PageFactory.initElements(driver, school.RequestsPage.class);
         testingPage = PageFactory.initElements(driver, TestingPage.class);
         contractsPage = PageFactory.initElements(driver, ContractsPage.class);
         studentsPage = PageFactory.initElements(driver, StudentsPage.class);
         invoicesPage = PageFactory.initElements(driver, InvoicesPage.class);
-        jsonReader = PageFactory.initElements(driver, JsonReader.class);
+        jsonReader = PageFactory.initElements(driver, utils.JsonReader.class);
     }
 
     @Rule
@@ -67,8 +69,8 @@ public class SendingRequestTest {
 
         @Override
         protected void finished(org.junit.runner.Description description) {
-//            if (driver != null)
-//                driver.quit();
+//            if (ru.isotm.distant.driver != null)
+//                ru.isotm.distant.driver.quit();
         }
     };
 
@@ -171,7 +173,7 @@ public class SendingRequestTest {
         requestsPage.checkRequestPage("Екатерина",
                 "",
                 "Женский",
-                DateUtils.calculateMinimumBirthDateWithDots(ChildTestInformationStep1Values.educationalStartDate),
+                utils.DateUtils.calculateMinimumBirthDateWithDots(ChildTestInformationStep1Values.educationalStartDate),
                 "Иностранное",
                 studentClass,
                 "Нет",

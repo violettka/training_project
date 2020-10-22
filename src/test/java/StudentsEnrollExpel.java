@@ -9,7 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import school.request.StudentsPage;
+import school.StudentsPage;
 import utils.ScreenshotUtils;
 import utils.SeleniumUtils;
 
@@ -44,8 +44,8 @@ public class StudentsEnrollExpel {
 
         @Override
         protected void finished(org.junit.runner.Description description) {
-//            if (driver != null)
-//                driver.quit();
+//            if (ru.isotm.distant.driver != null)
+//                ru.isotm.distant.driver.quit();
         }
     };
 

@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 
 public class AllStepsTest {
 
-    private static WebDriver driver;
+    private static WebDriver ru.isotm.distant.driver;
     private WebDriverWait wait;
     private String fileToUploadPath = Paths.get(getClass().getClassLoader().getResource("uploadFile.pdf").toURI()).toString();
     private ChildInformationPage1 childInformationPage1;
@@ -31,26 +31,26 @@ public class AllStepsTest {
 
     public AllStepsTest() throws URISyntaxException { }
 
-    public void initFromOtherTestClass(WebDriver driver) {
-        AllStepsTest.driver = driver;
+    public void initFromOtherTestClass(WebDriver ru.isotm.distant.driver) {
+        AllStepsTest.ru.isotm.distant.driver = ru.isotm.distant.driver;
         wait = SeleniumUtils.getDriverWait();
-        childInformationPage1 = PageFactory.initElements(driver, ChildInformationPage1.class);
-        childDocumentsPage3 = PageFactory.initElements(driver, ChildDocumentsPage3.class);
-        childTestInformationStep2 = PageFactory.initElements(driver, ChildTestInformationStep2.class);
-        parentInfoStep4Page = PageFactory.initElements(driver, ParentInfoStep4Page.class);
-        parentDocumentsStep5Page = PageFactory.initElements(driver, ParentDocumentsStep5Page.class);
+        childInformationPage1 = PageFactory.initElements(ru.isotm.distant.driver, ChildInformationPage1.class);
+        childDocumentsPage3 = PageFactory.initElements(ru.isotm.distant.driver, ChildDocumentsPage3.class);
+        childTestInformationStep2 = PageFactory.initElements(ru.isotm.distant.driver, ChildTestInformationStep2.class);
+        parentInfoStep4Page = PageFactory.initElements(ru.isotm.distant.driver, ParentInfoStep4Page.class);
+        parentDocumentsStep5Page = PageFactory.initElements(ru.isotm.distant.driver, ParentDocumentsStep5Page.class);
     }
 
     @Before
     public void setUp() throws InterruptedException {
-        driver = SeleniumUtils.getDriver();
+        ru.isotm.distant.driver = SeleniumUtils.getDriver();
         wait = SeleniumUtils.getDriverWait();
-        SeleniumUtils.initializeAndAuthorize(driver);
-        childInformationPage1 = PageFactory.initElements(driver, ChildInformationPage1.class);
-        childDocumentsPage3 = PageFactory.initElements(driver, ChildDocumentsPage3.class);
-        childTestInformationStep2 = PageFactory.initElements(driver, ChildTestInformationStep2.class);
-        parentInfoStep4Page = PageFactory.initElements(driver, ParentInfoStep4Page.class);
-        parentDocumentsStep5Page = PageFactory.initElements(driver, ParentDocumentsStep5Page.class);
+        SeleniumUtils.initializeAndAuthorize(ru.isotm.distant.driver);
+        childInformationPage1 = PageFactory.initElements(ru.isotm.distant.driver, ChildInformationPage1.class);
+        childDocumentsPage3 = PageFactory.initElements(ru.isotm.distant.driver, ChildDocumentsPage3.class);
+        childTestInformationStep2 = PageFactory.initElements(ru.isotm.distant.driver, ChildTestInformationStep2.class);
+        parentInfoStep4Page = PageFactory.initElements(ru.isotm.distant.driver, ParentInfoStep4Page.class);
+        parentDocumentsStep5Page = PageFactory.initElements(ru.isotm.distant.driver, ParentDocumentsStep5Page.class);
     }
 
     @Rule
@@ -58,18 +58,18 @@ public class AllStepsTest {
         @Override
         protected void failed(Throwable e, org.junit.runner.Description description) {
             makeScreenshotOnFailure();
-            ScreenshotUtils.saveScreenshotLocally(driver, description);
+            ScreenshotUtils.saveScreenshotLocally(ru.isotm.distant.driver, description);
         }
 
         @Attachment("Screenshot on failure")
         public byte[] makeScreenshotOnFailure() {
-            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            return ((TakesScreenshot) ru.isotm.distant.driver).getScreenshotAs(OutputType.BYTES);
         }
 
         @Override
         protected void finished(org.junit.runner.Description description) {
-            if (driver != null)
-                driver.quit();
+            if (ru.isotm.distant.driver != null)
+                ru.isotm.distant.driver.quit();
         }
     };
 
@@ -78,7 +78,7 @@ public class AllStepsTest {
     @Description("Проверка логики заполнения полей для 1 класса, Гражданство РФ, регистрация Москва, не многодетная семья")
     public void checkChildDocumentsFirstClassRFMoscow() throws InterruptedException {
         childInformationPage1.stepOneFirstClass(
-                driver,
+                ru.isotm.distant.driver,
                 "Васильева",
                 "Василиса",
                 "Васильевна",
@@ -124,7 +124,7 @@ public class AllStepsTest {
         parentDocumentsStep5Page.getParentPasswordFile1().sendKeys(fileToUploadPath);
         parentDocumentsStep5Page.getParentPasswordFile2().sendKeys(fileToUploadPath);
 
-        TakesScreenshot scrShot = ((TakesScreenshot) driver);
+        TakesScreenshot scrShot = ((TakesScreenshot) ru.isotm.distant.driver);
         ScreenshotUtils.saveScreenshot(scrShot.getScreenshotAs(OutputType.BYTES));
 
         parentDocumentsStep5Page.getButtonParentDocsNextStep().click();
@@ -135,7 +135,7 @@ public class AllStepsTest {
     @Test
     public void checkChildDocumentsFirstClass() throws InterruptedException {
         childInformationPage1.stepOneFirstClass(
-                driver,
+                ru.isotm.distant.driver,
                 "Васильева",
                 "Василиса",
                 "Васильевна",
@@ -202,7 +202,7 @@ public class AllStepsTest {
         childInformationPage1.getSelectYear().click();
         Thread.sleep(500);
         childInformationPage1.selectDropdownElement(educationalYear);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) ru.isotm.distant.driver;
         String educationalStartDate = js.executeScript("return document.getElementById('learning_start_date').value;").toString();
         assert childInformationPage1.getBirthdayDate().isEnabled();
         childInformationPage1.getBirthdayDate().sendKeys(DateUtils.calculateMinimumBirthDate(educationalStartDate));
@@ -295,7 +295,7 @@ public class AllStepsTest {
         childInformationPage1.getSelectYear().click();
         wait.until(ExpectedConditions.visibilityOfAllElements((childInformationPage1.getDropdownMenu())));
         childInformationPage1.selectDropdownElement(educationalYear);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) ru.isotm.distant.driver;
         String educationalStartDate = js.executeScript("return document.getElementById('learning_start_date').value;").toString();
         ChildTestInformationStep1Values.educationalStartDate = educationalStartDate;
         assert childInformationPage1.getBirthdayDate().isEnabled();

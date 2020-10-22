@@ -1,16 +1,11 @@
-import io.qameta.allure.Attachment;
-import org.junit.*;
-import org.junit.rules.TestWatcher;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.PageFactory;
+import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import request.ChildInformationPage1;
 import request.ChildTestInformationStep2;
 import utils.DateUtils;
-import utils.ScreenshotUtils;
-import utils.SeleniumUtils;
-import values.ApplicationGeneralInfoValues;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -20,40 +15,40 @@ public class ChildInformationPage1Test {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    private ChildInformationPage1 childInformationPage1;
+    private request.EnrolleeInfoFirstPage childInformationPage1;
     private ChildTestInformationStep2 childTestInformationStep2;
 
     private String errorRequiredMessage = "Поле обязательно к заполнению";
     private String errorBirthdayErrorMessage = "Прием в школу от 6 лет 4 месяцев";
 
-    @Before
-    public void setUp() throws InterruptedException {
-        driver = SeleniumUtils.getDriver();
-        wait = SeleniumUtils.getDriverWait();
-        SeleniumUtils.initializeAndAuthorize(driver);
-        childInformationPage1 = PageFactory.initElements(driver, ChildInformationPage1.class);
-        childTestInformationStep2 = PageFactory.initElements(driver, ChildTestInformationStep2.class);
-    }
+//    @Before
+//    public void setUp() throws InterruptedException {
+//        driver = SeleniumUtils.getDriver();
+//        wait = SeleniumUtils.getDriverWait();
+//        SeleniumUtils.initializeAndAuthorize(driver);
+//        childInformationPage1 = PageFactory.initElements(driver, EnrolleeInfoFirstPage.class);
+//        childTestInformationStep2 = PageFactory.initElements(driver, ChildTestInformationStep2.class);
+//    }
 
-    @Rule
-    public TestWatcher screenshotOnFailure = new TestWatcher() {
-        @Override
-        protected void failed(Throwable e, org.junit.runner.Description description) {
-            makeScreenshotOnFailure();
-            ScreenshotUtils.saveScreenshotLocally(driver, description);
-        }
-
-        @Attachment("Screenshot on failure")
-        public byte[] makeScreenshotOnFailure() {
-            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        }
-
-        @Override
-        protected void finished(org.junit.runner.Description description) {
-            if (driver != null)
-                driver.quit();
-        }
-    };
+//    @Rule
+//    public TestWatcher screenshotOnFailure = new TestWatcher() {
+//        @Override
+//        protected void failed(Throwable e, org.junit.runner.Description description) {
+//            makeScreenshotOnFailure();
+//            ScreenshotUtils.saveScreenshotLocally(driver, description);
+//        }
+//
+//        @Attachment("Screenshot on failure")
+//        public byte[] makeScreenshotOnFailure() {
+//            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//        }
+//
+//        @Override
+//        protected void finished(org.junit.runner.Description description) {
+//            if (driver != null)
+//                driver.quit();
+//        }
+//    };
 
     //  1. Проверка на полное заполнение полей всех полей формы на  текущий год
     @Test
